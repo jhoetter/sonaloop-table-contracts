@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist-package/
+*.tgz
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.tsbuildinfo
+.DS_Store

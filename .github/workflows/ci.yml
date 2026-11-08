@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0   # the tags and the whole history: the compatibility check and the secret scan read them
+          persist-credentials: false   # no token left in .git/config for the steps below
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - name: Install the tools (the package has one dependency; there is no lock file)
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund zod@3.25.76 typescript@5.9.3 tsx@4.23.13 esbuild@0.25.12 @types/node@22.19.0
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Tests
+        run: npm test
+      - name: Build the installable package
+        run: npm run build -- --out dist-package
+      - name: Standard contracts against the last tagged version (additive changes only)
+        run: npm run compat
+      - name: Secret scan (files and the whole history)
+        run: npm run scan

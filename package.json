@@ -1,0 +1,26 @@
+{
+  "name": "@sonaloop/table-contracts",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Table contracts as plain data: the format sonaloop.table-contract.v1 with a closed vocabulary, semantic checks, canonical JSON (RFC 8785) and content hash, compatibility rules, row validation and TypeScript row types without code generation.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema/*.json": "./schema/*.json",
+    "./standard/*.json": "./standard/*.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "schema": "tsx scripts/write-schema.ts",
+    "standard": "tsx scripts/write-standard.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --import tsx --test test/*.spec.mjs",
+    "compat": "tsx scripts/check-compat.ts",
+    "scan": "node scripts/scan-secrets.mjs"
+  },
+  "dependencies": {
+    "zod": ">=3.25.76 <5"
+  },
+  "license": "Apache-2.0"
+}

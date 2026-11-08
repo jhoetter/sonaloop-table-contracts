@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema": {
+      "type": "string",
+      "const": "sonaloop.table-contract.v1"
+    },
+    "id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "number"
+    },
+    "title": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "partition": {
+      "type": "string",
+      "enum": [
+        "tenant",
+        "organization"
+      ]
+    },
+    "personal": {
+      "type": "object",
+      "properties": {
+        "subjectKey": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subjectRef": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "retentionDays": {
+      "type": "number"
+    },
+    "appendOnly": {
+      "type": "boolean"
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "integer": {
+            "type": "boolean"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "target": {
+            "type": "string"
+          },
+          "items": {
+            "type": "string",
+            "enum": [
+              "text",
+              "number",
+              "boolean",
+              "date",
+              "timestamp",
+              "url",
+              "email",
+              "select",
+              "reference"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "markdown",
+              "number",
+              "boolean",
+              "date",
+              "timestamp",
+              "url",
+              "email",
+              "select",
+              "json",
+              "reference",
+              "object",
+              "list",
+              "image",
+              "video"
+            ]
+          },
+          "unique": {
+            "type": "boolean"
+          },
+          "index": {
+            "type": "boolean"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "privacy": {
+            "type": "string",
+            "enum": [
+              "technical",
+              "pseudonymous",
+              "personal"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "integer": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "target": {
+                  "type": "string"
+                },
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "number",
+                    "boolean",
+                    "date",
+                    "timestamp",
+                    "url",
+                    "email",
+                    "select",
+                    "reference"
+                  ]
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "markdown",
+                    "number",
+                    "boolean",
+                    "date",
+                    "timestamp",
+                    "url",
+                    "email",
+                    "select",
+                    "json",
+                    "reference",
+                    "list",
+                    "image",
+                    "video"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "name",
+          "type"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "anyRequired": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "anyRequired"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "id",
+    "version",
+    "title",
+    "purpose",
+    "partition",
+    "columns"
+  ],
+  "additionalProperties": false,
+  "title": "sonaloop.table-contract.v1",
+  "description": "A table described as plain data. Shape only; run checkContract for the semantic rules."
+}
